@@ -8,24 +8,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 
 public abstract class ImcaService {
 
 	protected Logger log = LoggerFactory.getLogger(getClass());
 
-	@Value("${webdriver.id}")
-	private String webDriverId = "webdriver.chrome.driver";
-
-	@Value("${webdriver.path}")
-	private String webDriverPath = "C:/work/project/now-nms/chromedriver_win32/chromedriver.exe";
-
 	public ImcaService() {
-		init();
-	}
-
-	public void init() {
-		System.setProperty(webDriverId, webDriverPath);
 	}
 
 	protected WebDriver driver() {

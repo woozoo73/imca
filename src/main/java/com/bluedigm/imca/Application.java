@@ -7,6 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application {
 
+	private String webDriverId = "webdriver.chrome.driver";
+
+	@Value("${webdriver.path}")
+	public void setWebDriverPath(String webDriverPath) {
+		System.setProperty(webDriverId, webDriverPath);
+	}
+
 	private static String deathbycaptchaUsername;
 
 	private static String deathbycaptchaPassword;
