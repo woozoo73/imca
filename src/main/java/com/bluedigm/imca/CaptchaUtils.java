@@ -29,8 +29,12 @@ public abstract class CaptchaUtils {
 			String imageString = parts[1];
 
 			byte[] imageByte = Base64.decode(imageString);
+			
+			log.info("username: {}, password: {}", Application.getDeathbycaptchaUsername(),
+					Application.getDeathbycaptchaPassword());
 
-			Client client = (Client) (new HttpClient("woozooha", "Cloud!234"));
+			Client client = new HttpClient(Application.getDeathbycaptchaUsername(),
+					Application.getDeathbycaptchaPassword());
 			client.isVerbose = true;
 
 			log.info("Your balance is {} US cents", client.getBalance());
@@ -41,7 +45,7 @@ public abstract class CaptchaUtils {
 				throw new RuntimeException("Can't found");
 			}
 
-			log.info("CAPTCHA {} solved: {}", captcha.text);
+			log.info("CAPTCHA solved: {}", captcha.text);
 
 			return captcha.text;
 		} catch (Exception e) {
