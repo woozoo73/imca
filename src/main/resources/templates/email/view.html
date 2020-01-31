@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Iptime Management Console Automation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p>
+		url: <span th:text="${cpe.url}"></span>
+	</p>
+	<p>
+		username: <span th:text="${cpe.username}"></span>
+	</p>
+	<p>
+		password: <span th:text="${cpe.password}"></span>
+	</p>
+	<p>
+		email: <span th:text="${emailSetting.email}"></span>
+	</p>
+	<p>
+		smtp: <span th:text="${emailSetting.smtp}"></span>
+	</p>
+	<p>
+		send email: <span th:text="${emailSetting.sendEmail}"></span>
+	</p>
+</body>
+</html>
