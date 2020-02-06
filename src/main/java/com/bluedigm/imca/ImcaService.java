@@ -19,7 +19,14 @@ public abstract class ImcaService {
 	protected WebDriver driver() {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-extensions");
-		options.addArguments("headless");
+
+		log.info("deathbycaptcha.usernam: {}", Config.getDeathbycaptchaUsername());
+		log.info("deathbycaptcha.password: {}", Config.getDeathbycaptchaPassword());
+		log.info("webdriver.headless: {}", Config.getWebdriverHeadless());
+
+		if (Config.getWebdriverHeadless()) {
+			options.addArguments("headless");
+		}
 		options.setCapability("ignoreProtectedModeSettings", true);
 		options.setExperimentalOption("excludeSwitches", new String[] { "enable-automation", "load-extension" });
 		Map<String, Object> prefs = new HashMap<String, Object>();

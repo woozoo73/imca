@@ -81,39 +81,38 @@ public class EmailService extends ImcaService {
 
 		sleep();
 
-		String script = "";
-		script += "var __c = document.createElement('canvas');";
-		script += "var __ctx = __c.getContext('2d');";
-		script += "var __img = document.getElementById('iframe_captcha').contentWindow.document.getElementsByTagName('img')[0];";
-		script += "__ctx.drawImage(__img, 0, 0, 200, 70, 0, 0, 200, 70);";
-		script += "var __t = document.createElement('input');";
-		script += "__t.setAttribute('id', 'captchaData');";
-		script += "__t.setAttribute('type', 'hidden');";
-		script += "__t.value = __c.toDataURL();";
-		script += "return __t.value;";
+		boolean existCaptcha = driver.findElements(By.name("iframe_captcha")).size() != 0;
+		log.info("existCaptcha: {}", existCaptcha);
 
-		String captcha = (String) js.executeScript(script);
+		if (existCaptcha) {
+			String script = "";
+			script += "var __c = document.createElement('canvas');";
+			script += "var __ctx = __c.getContext('2d');";
+			script += "var __img = document.getElementById('iframe_captcha').contentWindow.document.getElementsByTagName('img')[0];";
+			script += "__ctx.drawImage(__img, 0, 0, 200, 70, 0, 0, 200, 70);";
+			script += "var __t = document.createElement('input');";
+			script += "__t.setAttribute('id', 'captchaData');";
+			script += "__t.setAttribute('type', 'hidden');";
+			script += "__t.value = __c.toDataURL();";
+			script += "return __t.value;";
 
-		log.info("captcha: {}", captcha);
+			String captcha = (String) js.executeScript(script);
 
-		String decaptcha = CaptchaUtils.decaptcha(captcha, true);
+			log.info("captcha: {}", captcha);
 
-		sleep();
+			String decaptcha = CaptchaUtils.decaptcha(captcha, true);
+			sleep();
 
-		WebElement captchCode = driver.findElement(By.name("captcha_code"));
-		captchCode.sendKeys(decaptcha);
-
-		sleep();
+			WebElement captchCode = driver.findElement(By.name("captcha_code"));
+			captchCode.sendKeys(decaptcha);
+			sleep();
+		}
 
 		WebElement submitButton = driver.findElement(By.id("submit_bt"));
 		submitButton.click();
-
-		sleep(1_000L);
-
-		String url = driver.getCurrentUrl();
-		if (url.contains("/sess-bin/login_session.cgi")) {
-			throw new RuntimeException("login failed!");
-		}
+		
+		WebDriverWait urlAwait = new WebDriverWait(driver, 2);
+		urlAwait.until(ExpectedConditions.urlContains("/sess-bin/login.cgi"));
 	}
 
 	private void moveToConsole(WebDriver driver) {
@@ -226,9 +225,8 @@ public class EmailService extends ImcaService {
 
 		WebElement save = driver.findElement(saveBy);
 		save.click();
-
-		// FIXME
-		sleep(1_000L);
+		// FIXME:
+		sleep();
 
 		driver.switchTo().defaultContent();
 	}

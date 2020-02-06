@@ -30,11 +30,11 @@ public abstract class CaptchaUtils {
 
 			byte[] imageByte = Base64.decode(imageString);
 			
-			log.info("username: {}, password: {}", Application.getDeathbycaptchaUsername(),
-					Application.getDeathbycaptchaPassword());
+			log.info("username: {}, password: {}", Config.getDeathbycaptchaUsername(),
+					Config.getDeathbycaptchaPassword());
 
-			Client client = new HttpClient(Application.getDeathbycaptchaUsername(),
-					Application.getDeathbycaptchaPassword());
+			Client client = new HttpClient(Config.getDeathbycaptchaUsername(),
+					Config.getDeathbycaptchaPassword());
 			client.isVerbose = true;
 
 			log.info("Your balance is {} US cents", client.getBalance());
