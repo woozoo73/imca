@@ -1,4 +1,4 @@
-package com.bluedigm.imca;
+package com.bluedigm.imca.controller;
 
 import java.util.Map;
 
@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
+
+import com.bluedigm.imca.domain.Cpe;
+import com.bluedigm.imca.domain.EmailSetting;
+import com.bluedigm.imca.domain.EmailUpdateRequest;
+import com.bluedigm.imca.service.EmailService;
 
 @Controller
 public class EmailController {

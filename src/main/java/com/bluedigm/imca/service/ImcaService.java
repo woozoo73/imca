@@ -1,4 +1,4 @@
-package com.bluedigm.imca;
+package com.bluedigm.imca.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.bluedigm.imca.config.Config;
 
 public abstract class ImcaService {
 

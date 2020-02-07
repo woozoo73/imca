@@ -1,4 +1,4 @@
-package com.bluedigm.imca;
+package com.bluedigm.imca.util;
 
 import org.base64.Base64;
 import org.slf4j.Logger;
@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import com.DeathByCaptcha.Captcha;
 import com.DeathByCaptcha.Client;
 import com.DeathByCaptcha.HttpClient;
+import com.bluedigm.imca.config.Config;
 
 public abstract class CaptchaUtils {
 

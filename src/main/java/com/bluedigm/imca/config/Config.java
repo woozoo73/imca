@@ -1,14 +1,29 @@
-package com.bluedigm.imca;
+package com.bluedigm.imca.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
+@Configuration
 @Component
 public class Config {
 
 	private static Logger log = LoggerFactory.getLogger(Config.class);
+
+	@Value("${onms.url}")
+	private String onmsUrl;
+
+	@Value("${onms.admin.username}")
+	private String onmsAdminUsername;
+
+	@Value("${onms.admin.password}")
+	private String onmsAdminPassword;
 
 	private String webDriverId = "webdriver.chrome.driver";
 
@@ -56,6 +71,20 @@ public class Config {
 
 	public static String getDeathbycaptchaPassword() {
 		return deathbycaptchaPassword;
+	}
+
+	@Bean
+	public RestTemplate onmsRest() {
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(onmsUrl));
+		restTemplate.getInterceptors().add(onmsAuthorizationInterceptor());
+
+		return restTemplate;
+	}
+
+	@Bean
+	public ClientHttpRequestInterceptor onmsAuthorizationInterceptor() {
+		return new BasicAuthorizationInterceptor(onmsAdminUsername, onmsAdminPassword);
 	}
 
 }

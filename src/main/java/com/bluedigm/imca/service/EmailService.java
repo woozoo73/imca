@@ -1,4 +1,4 @@
-package com.bluedigm.imca;
+package com.bluedigm.imca.service;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,6 +8,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import com.bluedigm.imca.domain.Cpe;
+import com.bluedigm.imca.domain.EmailSetting;
+import com.bluedigm.imca.util.CaptchaUtils;
 
 @Service
 public class EmailService extends ImcaService {
@@ -69,7 +73,7 @@ public class EmailService extends ImcaService {
 	private void login(WebDriver driver, Cpe cpe) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		driver.get(cpe.getUrl() + "/sess-bin/login_session.cgi");
+		driver.get(cpe.getConsoleUrl() + "/sess-bin/login_session.cgi");
 
 		WebElement username = driver.findElement(By.name("username"));
 		username.sendKeys(cpe.getUsername());
