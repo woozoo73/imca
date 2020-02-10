@@ -55,65 +55,114 @@
 		</dependency>
 		<dependency>
 			<groupId>org.opennms</groupId>
-			<artifactId>opennms-model</artifactId>
+			<artifactId>opennms-web-api</artifactId>
 			<version>25.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/opennms-model-25.2.0.jar</systemPath>
+			<exclusions>
+				<exclusion>
+					<groupId>org.opennms</groupId>
+					<artifactId>opennms-config</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms</groupId>
+					<artifactId>opennms-dao-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.code.gson</groupId>
+					<artifactId>gson</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.features.distributed</groupId>
+					<artifactId>org.opennms.features.distributed.kv-store.api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.features.poller</groupId>
+					<artifactId>org.opennms.features.poller.remote</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.features.reporting</groupId>
+					<artifactId>org.opennms.features.reporting.core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>jfreechart-dependencies</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>servlet-dependencies</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>spring-dependencies</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>spring-security-core-dependencies</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>spring-web-dependencies</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.core.test-api</groupId>
+					<artifactId>org.opennms.core.test-api.lib</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.core.test-api</groupId>
+					<artifactId>org.opennms.core.test-api.db</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.core.test-api</groupId>
+					<artifactId>org.opennms.core.test-api.services</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>spring-test-dependencies</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms</groupId>
+					<artifactId>opennms-dao</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms</groupId>
+					<artifactId>opennms-dao-mock</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms</groupId>
+					<artifactId>opennms-rrd-jrobin</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>jrrd2-dependencies</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms</groupId>
+					<artifactId>opennms-rrdtool-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.features.collection</groupId>
+					<artifactId>org.opennms.features.collection.persistence.rrd</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-all</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.opennms</groupId>
-			<artifactId>opennms-provision-persistence</artifactId>
+			<groupId>org.opennms.features.status</groupId>
+			<artifactId>org.opennms.features.status.rest</artifactId>
 			<version>25.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/opennms-provision-persistence-25.2.0.jar</systemPath>
+			<exclusions>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>spring-dependencies</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.opennms.dependencies</groupId>
+					<artifactId>cxf-dependencies</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>org.opennms</groupId>
-			<artifactId>org.opennms.core.api</artifactId>
-			<version>25.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/org.opennms.core.api-25.2.0.jar</systemPath>
-		</dependency>	
-		<dependency>
-			<groupId>org.opennms</groupId>
-			<artifactId>org.opennms.core.lib</artifactId>
-			<version>25.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/org.opennms.core.lib-25.2.0.jar</systemPath>
-		</dependency>
-
-<dependency>
-    <groupId>javax.xml.bind</groupId>
-    <artifactId>jaxb-api</artifactId>
-    <version>2.3.0-b170201.1204</version>
-</dependency>
-
-<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
-<dependency>
-    <groupId>javax.activation</groupId>
-    <artifactId>activation</artifactId>
-    <version>1.1</version>
-</dependency>
-
-<!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
-<dependency>
-    <groupId>org.glassfish.jaxb</groupId>
-    <artifactId>jaxb-runtime</artifactId>
-    <version>2.3.0-b170127.1453</version>
-</dependency>
-
-
-<dependency>
-    <groupId>org.codehaus.jackson</groupId>
-    <artifactId>jackson-mapper-asl</artifactId>
-    <version>1.9.13</version>
-</dependency>
-<dependency>
-    <groupId>org.codehaus.jackson</groupId>
-    <artifactId>jackson-core-asl</artifactId>
-    <version>1.9.13</version>
-</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -131,6 +180,22 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</repository>
+		<repository>
+			<id>opennms-repository</id>
+			<name>OpenNMS Repository for Maven</name>
+			<url>https://repo.opennms.org/maven2</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.opennms.netmgt.model.OnmsNode;
+import org.opennms.netmgt.model.OnmsNodeList;
 import org.opennms.netmgt.provision.persist.requisition.Requisition;
 import org.opennms.web.rest.v2.status.model.NodeDTO;
 import org.opennms.web.rest.v2.status.model.NodeDTOList;
@@ -23,7 +25,7 @@ public class OnmsService {
 	RestTemplate onmsRest;
 
 	public void add(Cpe cpe) {
-		log.info("cpe: {}", cpe);
+		log.info("add cpe: {}", cpe);
 
 		Requisition requisition = cpe.toRequisition();
 
@@ -33,13 +35,27 @@ public class OnmsService {
 		onmsRest.put("rest/requisitions/{name}/import?rescanExisting=true", null, cpe.getName());
 	}
 
-	public List<Cpe> getDownCpes() {
-		NodeDTOList nodes = onmsRest.getForObject("api/v2/status/nodes/outages?severityFilter={severity}",
-				NodeDTOList.class, "Major");
-		log.info("nodes: {}", nodes);
+	public List<Cpe> getCpes() {
+		OnmsNodeList nodes = onmsRest.getForObject("rest/nodes?limit={limit}", OnmsNodeList.class, 0);
+		log.info("getCpes nodes: {}", nodes);
 
 		List<Cpe> cpes = new ArrayList<>();
-		for (NodeDTO node : nodes) {
+		for (OnmsNode node : nodes.getObjects()) {
+			cpes.add(new Cpe(node));
+		}
+
+		log.info("cpes: {}", cpes);
+
+		return cpes;
+	}
+
+	public List<Cpe> getDownCpes() {
+		NodeDTOList nodes = onmsRest.getForObject("api/v2/status/nodes/outages?severityFilter={severity}&limit={limit}",
+				NodeDTOList.class, "Major", Integer.MAX_VALUE);
+		log.info("getDownCpes nodes: {}", nodes);
+
+		List<Cpe> cpes = new ArrayList<>();
+		for (NodeDTO node : nodes.getObjects()) {
 			cpes.add(new Cpe(node));
 		}
 

@@ -4,8 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +18,11 @@ import com.bluedigm.imca.domain.EmailSetting;
 import com.bluedigm.imca.domain.EmailUpdateRequest;
 import com.bluedigm.imca.service.EmailService;
 
-@Controller
-public class EmailController {
+import lombok.extern.slf4j.Slf4j;
 
-	protected Logger log = LoggerFactory.getLogger(getClass());
+@Controller
+@Slf4j
+public class EmailController {
 
 	@Autowired
 	private EmailService emailService;
@@ -49,7 +48,7 @@ public class EmailController {
 	@PostMapping("/email")
 	public String update(@ModelAttribute final EmailUpdateRequest emailUpdateRequest,
 			final RedirectAttributes redirectAttributes) {
-		log.info("update: {}", emailUpdateRequest);
+		log.info("update emailUpdateRequest: {}", emailUpdateRequest);
 
 		Cpe cpe = emailUpdateRequest.getCpe();
 		EmailSetting emailSetting = emailUpdateRequest.getEmailSetting();

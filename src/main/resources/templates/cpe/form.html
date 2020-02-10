@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Iptime Management Console Automation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<form th:action="@{/cpe}" th:method="post">
+		<p>
+			name: TEST-NMS_<input type="text" name="name" />
+		</p>
+		<p>
+			ip: <input type="text" name="ip" />
+		</p>
+		<p>
+			city: <input type="text" name="city" />
+		</p>
+		<p>
+			building: <input type="text" name="building" />
+		</p>
+		<p>
+			monitoring services: 
+			<input id="services.HTTP" type="checkbox" name="services" /><label th:text="HTTP" for="services.HTTP">HTTP</label>
+			<input id="services.HTTPS" type="checkbox" name="services" /><label th:text="HTTPS" for="services.HTTPS">HTTPS</label>
+			<input id="services.SNMP" type="checkbox" name="services" /><label th:text="SNMP" for="services.SNMP">SNMP</label>
+		</p>		
+		<input type="submit" />
+	</form>
+</body>
+</html>

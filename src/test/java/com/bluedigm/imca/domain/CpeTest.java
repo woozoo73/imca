@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 class CpeTest {
 
 	@Test
-	void test() {
+	void toRequisition() {
 		Cpe cpe = new Cpe();
 		cpe.setName("test-02");
 		cpe.setCity("test-building");

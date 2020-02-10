@@ -1,8 +1,10 @@
 package com.bluedigm.imca.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.opennms.netmgt.model.OnmsNode;
 import org.opennms.netmgt.model.PrimaryType;
 import org.opennms.netmgt.provision.persist.requisition.Requisition;
 import org.opennms.netmgt.provision.persist.requisition.RequisitionInterface;
@@ -19,6 +21,8 @@ public class Cpe {
 
 	private String name;
 
+	private String nameSuffix;
+
 	private String ip;
 
 	private List<String> services;
@@ -33,12 +37,20 @@ public class Cpe {
 
 	private String password;
 
-	public Cpe() {		
+	private Date createTime;
+
+	public Cpe() {
 	}
 
 	public Cpe(NodeDTO node) {
 		this.id = node.getId();
 		this.name = node.getName();
+	}
+
+	public Cpe(OnmsNode node) {
+		this.id = node.getId();
+		this.name = node.getLabel();
+		this.createTime = node.getCreateTime();
 	}
 
 	/**

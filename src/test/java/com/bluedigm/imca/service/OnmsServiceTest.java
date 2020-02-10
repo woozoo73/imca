@@ -31,8 +31,13 @@ class OnmsServiceTest {
 	}
 
 	@Test
+	public void getCpes() {
+		onmsService.getCpes();
+	}
+
+	@Test
 	public void getDownCpes() {
 		onmsService.getDownCpes();
 	}
-	
+
 }
